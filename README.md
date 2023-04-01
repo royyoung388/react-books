@@ -16,7 +16,6 @@ Library must support TypeScript, which means `@types/LibName` also should exist 
 
 <details>
   <summary>package.json</summary>
-  <p> - 测试 测试测试</p>
   <pre><code>
 {
   "name": "react-demo",
