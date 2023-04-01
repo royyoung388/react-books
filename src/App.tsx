@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component, ReactNode} from 'react';
 import './App.css';
+import {Header} from "./header/Header";
+import {connect} from "react-redux";
+import {checkLogin} from "./action/auth.action";
+import {AxiosResponse} from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component<AppProps, any> {
+
+    componentDidMount() {
+        this.props.checkLogin();
+    }
+
+    render() {
+        return (
+            <>
+                <Header></Header>
+                <main>
+                    {this.props.children}
+                </main>
+            </>
+        );
+    };
 }
 
-export default App;
+interface AppProps {
+    checkLogin: () => { type: string, payload: Promise<AxiosResponse> | null };
+    children?: ReactNode;
+}
+
+export default connect(null, {checkLogin})(App);
